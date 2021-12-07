@@ -1,0 +1,27 @@
+---
+- name: Install epel repository
+  package:
+    name: epel-release
+    state: present
+
+- name: Install the nagios software
+  package:
+    name: nagios
+    state: present
+
+#
+# Using htpasswd to set the nagiosadmin password so that the
+# task will be idempotent - it won't break anything else in
+# the file, it will only change the one user's password
+#
+- name: Change nagiosadmin password
+  command:
+    cmd: htpasswd -b /etc/nagios/passwd nagiosadmin {{ nagiosadmin_password }}
+
+- name: Start services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items: [ nagios, httpd ]
+
