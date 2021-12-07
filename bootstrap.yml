@@ -1,7 +1,7 @@
 ---
 - name: Basic bootstrap steps for a managed node
   hosts: all
-  remote_user: student
+  remote_user: root
   gather_facts: no
 
   tasks:
