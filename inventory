@@ -1,13 +1,37 @@
+#
+# Each data center has 4 nodes in it, and the nodes are organized as:
+#  First node: Monitoring system (nagios)
+#  Second node: database and/or load balancing server
+#  Third/Fourth nodes: web servers
+#
 
+[nyc3]
 instructor-node01.training.edgecloud.com
 instructor-node02.training.edgecloud.com
-[new]
 instructor-node03.training.edgecloud.com
 instructor-node04.training.edgecloud.com
+
+[sfo]
 instructor-node05.training.edgecloud.com
 instructor-node06.training.edgecloud.com
 instructor-node07.training.edgecloud.com
 instructor-node08.training.edgecloud.com
+
+[nagios]
+instructor-node01.training.edgecloud.com
+instructor-node05.training.edgecloud.com
+
+[db]
+instructor-node02.training.edgecloud.com
+instructor-node06.training.edgecloud.com
+
+[web]
+instructor-node03.training.edgecloud.com
+instructor-node04.training.edgecloud.com
+instructor-node07.training.edgecloud.com
+instructor-node08.training.edgecloud.com
+
+
 
 
 
