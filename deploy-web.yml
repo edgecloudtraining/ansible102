@@ -1,0 +1,11 @@
+---
+- name: Deploy website to the lab environment
+  hosts: web
+  become: true
+  gather_facts: false
+  
+  tasks:
+    - name: Import webserver role
+      import_role:
+        name: webserver
+
