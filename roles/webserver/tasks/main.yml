@@ -1,0 +1,32 @@
+---
+- name: Install required software
+  package:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - "{{ web_package }}"
+    - git
+
+- name: Deploy website from git repo
+  git:
+    repo: https://github.com/edgecloudtraining/lab-website.git
+    dest: /var/www/html/
+    force: yes
+    separate_git_dir: /var/www/lab-website.git/
+  tags: [ website ]
+
+- name: Start and enable the Apache webserver
+  service:
+    name: "{{ web_service }}"
+    state: started
+    enabled: true
+
+- name: Verify website is responding correctly
+  uri:
+    url: http://{{ inventory_hostname }}/
+    return_content: yes
+  register: response
+  until: '"alamo" in response.content'
+  retries: 5
+  delay: 1
+  tags: [ always ]
