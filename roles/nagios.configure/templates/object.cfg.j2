@@ -12,3 +12,13 @@ define service {
     service_description     PING
     check_command           check_ping!100.0,20%!500.0,60%
 }
+
+{% if 'web' in hostvars[item]['group_names'] %}
+define service {
+    use                     local-service
+    host_name               {{ item }}
+    service_description     HTTP
+    check_command           check_http!-s alamo
+}
+{% endif %}
+
